@@ -5,12 +5,13 @@ import type { OmdbMovie, OmdbSearchResponse } from '@/ts/movieInterfaces'
 
 export const useMovieStore = defineStore('movie', () => {
   const listOfMovies: Ref<OmdbMovie[] | undefined> = ref(undefined)
-  const searchMovies = async (search: string) => {
+  const searchMovies = async (search: string, year: string) => {
     try {
       let response: OmdbSearchResponse = (
         await omdbService.get('', {
           params: {
-            s: search
+            s: search,
+            y: year
           }
         })
       ).data
